@@ -1,0 +1,29 @@
+{
+  "name": "maven-artifact-linker",
+  "title": "Maven Artifact Linker",
+  "description": "jQuery plugin which fetches the latest version of a Maven artifact from the central repos.",
+  "keywords": [
+    "maven",
+    "artifact",
+    "download",
+    "links"
+  ],
+  "version": "1.0.0",
+  "author": {
+    "name": "Jake Wharton",
+    "email": "jakewharton@gmail.com",
+    "url": "https://github.com/JakeWharton"
+  },
+  "licenses": [
+    {
+      "type": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  ],
+  "bugs": "https://github.com/JakeWharton/jquery-maven-artifact/issues",
+  "homepage": "http://jakewharton.github.com/jquery-maven-artifact",
+  "download": "https://github.com/JakeWharton/jquery-maven-artifact/archive/gh-pages.zip",
+  "dependencies": {
+    "jquery": ">=1.0"
+  }
+}
