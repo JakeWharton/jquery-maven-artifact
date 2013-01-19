@@ -12,6 +12,7 @@ Fetching latest version:
 
 ```javascript
 $.fn.artifactVersion('com.squareup', 'otto', function(version) {
+  $('.download').attr('href', url);
   $('.version').text('Version ' + version);
 });
 ```
