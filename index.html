@@ -61,7 +61,8 @@
       <div class="row">
         <div class="span6">
           <h3>Example: Latest Version</h3>
-          <pre class="prettyprint">$.fn.artifactVersion('com.squareup', 'otto', function(version) {
+          <pre class="prettyprint">$.fn.artifactVersion('com.squareup', 'otto', function(version, url) {
+  $('.download').attr('href', url);
   $('.version').text('Version ' + version);
 });</pre>
           <h4>Result:</h4>
@@ -72,7 +73,11 @@
           <h3>Example: Newest Versions</h3>
           <pre class="prettyprint">$.fn.artifactVersions('com.squareup', 'otto', function(versions) {
   $.each(versions, function() {
-    $('.versions').append($('&lt;li>').text(this.version));
+    $('.versions').append(
+      $('<li>').append(
+        $('<a>').attr('href', this.url).text(this.name)
+      )
+    );
   });
 });</pre>
           <h4>Result:</h4>
