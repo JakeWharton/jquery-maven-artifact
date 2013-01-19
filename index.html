@@ -28,6 +28,9 @@
         word-wrap: normal;
         white-space: pre;
       }
+      .footer {
+        margin-top: 50px;
+      }
     </style>
     <script src="jquery-maven-artifact.js"></script>
     <script type="text/javascript">
@@ -55,6 +58,7 @@
           <div class="hero-unit">
             <h1>jQuery Maven Artifact Plugin</h1>
             <p>jQuery plugin which fetches the latest version of a Maven artifact from the central repos.</p>
+            <p><a href="http://github.com/jakewharton/jquery-maven-artifact">github.com/jakewharton/jquery-maven-artifact</a></p>
           </div>
         </div>
       </div>
@@ -74,8 +78,8 @@
           <pre class="prettyprint">$.fn.artifactVersions('com.squareup', 'otto', function(versions) {
   $.each(versions, function() {
     $('.versions').append(
-      $('<li>').append(
-        $('<a>').attr('href', this.url).text(this.name)
+      $('&lt;li>').append(
+        $('&lt;a>').attr('href', this.url).text(this.name)
       )
     );
   });
