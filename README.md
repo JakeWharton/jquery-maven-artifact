@@ -5,6 +5,32 @@ jQuery plugin which fetches the latest version of a Maven artifact from the cent
 
 
 
+Examples
+--------
+
+Fetching latest version:
+
+```javascript
+$.fn.artifactVersion('com.squareup', 'otto', function(version) {
+  $('.version').text('Version ' + version);
+});
+```
+
+Fetching newest versions:
+
+```javascript
+$.fn.artifactVersions('com.squareup', 'otto', function(versions) {
+  $.each(versions, function() {
+    $('.versions').append(
+      $('<li>').append(
+        $('<a>').attr('href', this.url).text(this.name)
+      )
+    );
+  });
+});
+```
+
+
 License
 -------
 
