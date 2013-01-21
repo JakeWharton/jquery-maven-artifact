@@ -2,7 +2,7 @@
   function downloadUrl(groupId, artifactId, version, type) {
     var groupPath = groupId.replace('.', '/');
     var artifactPath = artifactId.replace('.', '/');
-    return 'http://search.maven.org/remotecontent?filepath=' + groupPath + '/' + artifactPath + '/' + version + '/' + artifactId + '-' + version + type;
+    return 'http://repo1.maven.org/maven2/' + groupPath + '/' + artifactPath + '/' + version + '/' + artifactId + '-' + version + type;
   }
 
   $.fn.artifactVersion = function(groupId, artifactId, callback) {
