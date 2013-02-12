@@ -1,7 +1,7 @@
 /**
  * jQuery Maven Artifact Plugin
  *
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: Jake Wharton
  * License: Apache 2.0
  */
@@ -25,6 +25,10 @@
     var url = 'http://search.maven.org/solrsearch/select/?q=g:"' + groupId + '"+AND+a:"' + artifactId + '"&wt=json&json.wrf=?';
     $.getJSON(url, function(response) {
       var versions = response.response.docs;
+      if (versions.length == 0) {
+        return;
+      }
+
       var version = versions[0].latestVersion;
       var versionUrl = downloadUrl(groupId, artifactId, version, '.jar');
       callback(version, versionUrl);
@@ -44,6 +48,9 @@
     var url = 'http://search.maven.org/solrsearch/select/?q=g:"' + groupId + '"+AND+a:"' + artifactId + '"&wt=json&rows=10&core=gav&json.wrf=?';
     $.getJSON(url, function(response) {
       var versions = response.response.docs;
+      if (versions.length == 0) {
+        return;
+      }
       versions.sort(function(o1, o2) {
         return o1.v > o2.v ? -1 : 1;
       });
