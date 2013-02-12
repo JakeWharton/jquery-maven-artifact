@@ -32,6 +32,20 @@ $.fn.artifactVersions('com.squareup', 'otto', function(versions) {
 ```
 
 
+
+Compilation
+-----------
+
+Generating the minified version requires the `uglifyjs` binary to be on your PATH. You
+can install this from `npm` if you have node.js on your system.
+
+Running `make.sh` will minify the latest javascript.
+
+If you are submitting a pull request, please be sure to run this script and include the
+changes in your commit first.
+
+
+
 License
 -------
 

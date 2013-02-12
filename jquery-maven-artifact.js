@@ -1,3 +1,10 @@
+/**
+ * jQuery Maven Artifact Plugin
+ *
+ * Version: 1.0.0
+ * Author: Jake Wharton
+ * License: Apache 2.0
+ */
 (function($) {
   function downloadUrl(groupId, artifactId, version, type) {
     var groupPath = groupId.replace('.', '/');
