@@ -37,7 +37,7 @@
           $('.download').attr('href', url);
           $('.version').text('Version ' + version);
         });
-        $.fn.artifactVersions('com.squareup', 'otto', function(versions) {
+        $.fn.artifactVersions('com.squareup.spoon', 'spoon-client', function(versions) {
           $.each(versions, function() {
             $('.versions').append(
               $('<li>').append(
@@ -76,7 +76,7 @@
         </div>
         <div class="span6">
           <h3>Example: Newest Versions</h3>
-          <pre class="prettyprint">$.fn.artifactVersions('com.squareup', 'otto', function(versions) {
+          <pre class="prettyprint">$.fn.artifactVersions('com.squareup.spoon', 'spoon-client', function(versions) {
   $.each(versions, function() {
     $('.versions').append(
       $('&lt;li>').append(

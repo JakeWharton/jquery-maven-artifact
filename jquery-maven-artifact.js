@@ -7,9 +7,8 @@
  */
 (function($) {
   function downloadUrl(groupId, artifactId, version, type) {
-    var groupPath = groupId.replace('.', '/');
-    var artifactPath = artifactId.replace('.', '/');
-    return 'http://repo1.maven.org/maven2/' + groupPath + '/' + artifactPath + '/' + version + '/' + artifactId + '-' + version + type;
+    var groupPath = groupId.replace(/\./g, '/');
+    return 'http://repo1.maven.org/maven2/' + groupPath + '/' + artifactId + '/' + version + '/' + artifactId + '-' + version + type;
   }
 
   $.fn.artifactVersion = function(groupId, artifactId, callback) {

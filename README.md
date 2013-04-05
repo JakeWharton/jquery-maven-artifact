@@ -20,7 +20,7 @@ $.fn.artifactVersion('com.squareup', 'otto', function(version) {
 Fetching newest versions:
 
 ```javascript
-$.fn.artifactVersions('com.squareup', 'otto', function(versions) {
+$.fn.artifactVersions('com.squareup.spoon', 'spoon-client', function(versions) {
   $.each(versions, function() {
     $('.versions').append(
       $('<li>').append(
