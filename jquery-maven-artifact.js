@@ -13,11 +13,11 @@
 
   $.fn.artifactVersion = function(groupId, artifactId, callback) {
     if (typeof(groupId) !== 'string' || typeof(artifactId) !== 'string') {
-      console.log('Error: groupId and artifactId are required.');
+      alert('Error: groupId and artifactId are required.');
       return;
     }
     if (typeof(callback) === 'undefined') {
-      console.log('Error: callback function required.');
+      alert('Error: callback function required.');
       return;
     }
 
@@ -36,11 +36,11 @@
 
   $.fn.artifactVersions = function(groupId, artifactId, callback) {
     if (typeof(groupId) !== 'string' || typeof(artifactId) !== 'string') {
-      console.log('Error: groupId and artifactId are required.');
+      alert('Error: groupId and artifactId are required.');
       return;
     }
     if (typeof(callback) === 'undefined') {
-      console.log('Error: callback function required.');
+      alert('Error: callback function required.');
       return;
     }
 
