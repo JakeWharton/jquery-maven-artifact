@@ -11,7 +11,10 @@ Examples
 Fetching latest version:
 
 ```javascript
-$.fn.artifactVersion('com.squareup', 'otto', function(version) {
+$.fn.artifactVersion({
+  'groupId': 'com.squareup',
+  'artifactId': 'otto'
+}, function(version, url) {
   $('.download').attr('href', url);
   $('.version').text('Version ' + version);
 });
@@ -20,14 +23,43 @@ $.fn.artifactVersion('com.squareup', 'otto', function(version) {
 Fetching newest versions:
 
 ```javascript
-$.fn.artifactVersions('com.squareup.spoon', 'spoon-client', function(versions) {
+$.fn.artifactVersions({
+  'groupId': 'com.squareup.spoon',
+  'artifactId': 'spoon-client'
+}, function(versions) {
   $.each(versions, function() {
     $('.versions').append(
-      $('<li>').append(
-        $('<a>').attr('href', this.url).text(this.name)
+      $('&lt;li>').append(
+        $('&lt;a>').attr('href', this.url).text(this.name)
       )
     );
   });
+});
+```
+
+Fetching specific classifier:
+
+```javascript
+$.fn.artifactVersion({
+  'groupId': 'com.squareup.okhttp',
+  'artifactId': 'okhttp',
+  'classifier': 'jar-with-dependencies'
+}, function(version, url) {
+  $('.download').attr('href', url);
+  $('.version').text('Version ' + version);
+});
+```
+
+Fetching specific packaging:
+
+```javascript
+$.fn.artifactVersion({
+  'groupId': 'net.simonvt.messagebar',
+  'artifactId': 'messagebar',
+  'packaging': 'aar'
+}, function(version, url) {
+  $('.download').attr('href', url);
+  $('.version').text('Version ' + version);
 });
 ```
 
