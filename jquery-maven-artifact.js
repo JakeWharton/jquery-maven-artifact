@@ -72,6 +72,7 @@
       alert('Error: callback function required.');
       return;
     }
+    var config = $.extend({}, defaults, config);
 
     var url = 'http://search.maven.org/solrsearch/select/?q=' + queryBuilder(config) + '&wt=json&rows=10&core=gav&json.wrf=?';
     $.getJSON(url, function(response) {
