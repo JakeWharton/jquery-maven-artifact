@@ -33,18 +33,47 @@
     <script src="jquery-maven-artifact.js"></script>
     <script type="text/javascript">
       $(function() {
-        $.fn.artifactVersion('com.squareup', 'otto', function(version, url) {
-          $('.download').attr('href', url);
-          $('.version').text('Version ' + version);
+        // Example: Latest version
+        $.fn.artifactVersion({
+          'groupId': 'com.squareup',
+          'artifactId': 'otto'
+        }, function(version, url) {
+          $('.ex1.download').attr('href', url);
+          $('.ex1.version').text('Version ' + version);
         });
-        $.fn.artifactVersions('com.squareup.spoon', 'spoon-client', function(versions) {
+
+        // Example: Newest versions
+        $.fn.artifactVersions({
+          'groupId': 'com.squareup.spoon',
+          'artifactId': 'spoon-client'
+        }, function(versions) {
           $.each(versions, function() {
-            $('.versions').append(
+            $('.ex2.versions').append(
               $('<li>').append(
                 $('<a>').attr('href', this.url).text(this.name)
               )
             );
           });
+        });
+
+        // Example: Classifier
+        $.fn.artifactVersion({
+          'groupId': 'com.squareup.okhttp',
+          'artifactId': 'okhttp',
+          'classifier': 'jar-with-dependencies'
+        }, function(version, url) {
+          $('.ex3.download').attr('href', url);
+          $('.ex3.version').text('Version ' + version);
+        });
+
+        // Example: Packaging
+        $.fn.artifactVersion({
+          'groupId': 'net.simonvt.messagebar',
+          'artifactId': 'messagebar',
+          'packaging': 'aar'
+        }, function(version, url) {
+          $('.ex4.download').attr('href', url);
+          $('.ex4.version').text('Version ' + version);
         });
       });
     </script>
@@ -66,17 +95,23 @@
       </div>
       <div class="row">
         <div class="span6">
-          <h3>Example: Latest Version</h3>
-          <pre class="prettyprint">$.fn.artifactVersion('com.squareup', 'otto', function(version, url) {
+          <h3>Example: Latest version</h3>
+          <pre class="prettyprint">$.fn.artifactVersion({
+  'groupId': 'com.squareup',
+  'artifactId': 'otto'
+}, function(version, url) {
   $('.download').attr('href', url);
   $('.version').text('Version ' + version);
 });</pre>
           <h4>Result:</h4>
-          <p><a href="#" class="download">Download <span class="version">latest version</span></a>.</p>
+          <p><a href="#" class="ex1 download">Download <span class="ex1 version">latest version</span></a>.</p>
         </div>
         <div class="span6">
-          <h3>Example: Newest Versions</h3>
-          <pre class="prettyprint">$.fn.artifactVersions('com.squareup.spoon', 'spoon-client', function(versions) {
+          <h3>Example: Newest versions</h3>
+          <pre class="prettyprint">$.fn.artifactVersions({
+  'groupId': 'com.squareup.spoon',
+  'artifactId': 'spoon-client'
+}, function(versions) {
   $.each(versions, function() {
     $('.versions').append(
       $('&lt;li>').append(
@@ -87,8 +122,36 @@
 });</pre>
           <h4>Result:</h4>
           <p>Spoon client versions:</p>
-          <ul class="versions">
+          <ul class="ex2 versions">
           </ul>
+        </div>
+      </div>
+      <div class="row">
+        <div class="span6">
+          <h3>Example: Classifier</h3>
+          <pre class="prettyprint">$.fn.artifactVersion({
+  'groupId': 'com.squareup.okhttp',
+  'artifactId': 'okhttp',
+  'classifier': 'jar-with-dependencies'
+}, function(version, url) {
+  $('.download').attr('href', url);
+  $('.version').text('Version ' + version);
+});</pre>
+          <h4>Result:</h4>
+          <p><a href="#" class="ex3 download">Download <span class="ex3 version">latest version</span></a>.</p>
+        </div>
+        <div class="span6">
+          <h3>Example: Packaging</h3>
+          <pre class="prettyprint">$.fn.artifactVersion({
+  'groupId': 'net.simonvt.messagebar',
+  'artifactId': 'messagebar',
+  'packaging': 'aar'
+}, function(version, url) {
+  $('.download').attr('href', url);
+  $('.version').text('Version ' + version);
+});</pre>
+          <h4>Result:</h4>
+          <p><a href="#" class="ex4 download">Download <span class="ex4 version">latest version</span></a>.</p>
         </div>
       </div>
     </div>

@@ -1,42 +1,71 @@
 /**
  * jQuery Maven Artifact Plugin
  *
- * Version: 1.0.1
+ * Version: 2.0.0
  * Author: Jake Wharton
  * License: Apache 2.0
  */
 (function($) {
-  function downloadUrl(groupId, artifactId, version, type) {
-    var groupPath = groupId.replace(/\./g, '/');
-    return 'http://repo1.maven.org/maven2/' + groupPath + '/' + artifactId + '/' + version + '/' + artifactId + '-' + version + type;
+  var defaults = {
+    'packaging': 'jar'
+  };
+
+  function downloadUrl(config, version) {
+    var groupPath = config.groupId.replace(/\./g, '/');
+    var url = 'http://repo1.maven.org/maven2/' + groupPath + '/' + config.artifactId + '/' + version + '/' + config.artifactId + '-' + version;
+    if (typeof(config.classifier) !== 'undefined') {
+      url += '-' + config.classifier;
+    }
+    url += '.' + config.packaging;
+    return url;
   }
 
-  $.fn.artifactVersion = function(groupId, artifactId, callback) {
-    if (typeof(groupId) !== 'string' || typeof(artifactId) !== 'string') {
-      alert('Error: groupId and artifactId are required.');
+  function queryBuilder(config) {
+    var propertiesToQuery = {
+      'groupId': 'g',
+      'artifactId': 'a',
+      'packaging': 'p',
+      'classifier': 'l'
+    };
+    var query = '';
+    for (var property in propertiesToQuery) {
+      if (propertiesToQuery.hasOwnProperty(property) && config.hasOwnProperty(property)) {
+        if (query !== '') {
+          query += '+AND+';
+        }
+        query += propertiesToQuery[property] + ':"' + config[property] + '"';
+      }
+    }
+    return query;
+  }
+
+  $.fn.artifactVersion = function(config, callback) {
+    if (typeof(config) === 'undefined') {
+      alert('Error: config object is required.');
       return;
     }
     if (typeof(callback) === 'undefined') {
       alert('Error: callback function required.');
       return;
     }
+    var config = $.extend({}, defaults, config);
 
-    var url = 'http://search.maven.org/solrsearch/select/?q=g:"' + groupId + '"+AND+a:"' + artifactId + '"&wt=json&json.wrf=?';
+    var url = 'http://search.maven.org/solrsearch/select/?q=' + queryBuilder(config) + '&wt=json&json.wrf=?';
     $.getJSON(url, function(response) {
       var versions = response.response.docs;
       if (versions.length == 0) {
         return;
       }
 
-      var version = versions[0].latestVersion;
-      var versionUrl = downloadUrl(groupId, artifactId, version, '.jar');
+      var version = versions[0].latestVersion || versions[0].v;
+      var versionUrl = downloadUrl(config, version);
       callback(version, versionUrl);
     });
   };
 
-  $.fn.artifactVersions = function(groupId, artifactId, callback) {
-    if (typeof(groupId) !== 'string' || typeof(artifactId) !== 'string') {
-      alert('Error: groupId and artifactId are required.');
+  $.fn.artifactVersions = function(config, callback) {
+    if (typeof(config) === 'undefined') {
+      alert('Error: config object is required.');
       return;
     }
     if (typeof(callback) === 'undefined') {
@@ -44,7 +73,7 @@
       return;
     }
 
-    var url = 'http://search.maven.org/solrsearch/select/?q=g:"' + groupId + '"+AND+a:"' + artifactId + '"&wt=json&rows=10&core=gav&json.wrf=?';
+    var url = 'http://search.maven.org/solrsearch/select/?q=' + queryBuilder(config) + '&wt=json&rows=10&core=gav&json.wrf=?';
     $.getJSON(url, function(response) {
       var versions = response.response.docs;
       if (versions.length == 0) {
@@ -58,7 +87,7 @@
         var version = versions[i].v;
         newVersions.push({
           name: version,
-          url: downloadUrl(groupId, artifactId, version, '.jar')
+          url: downloadUrl(config, version)
         });
       }
       callback(newVersions);
