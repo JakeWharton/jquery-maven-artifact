@@ -1,6 +1,13 @@
 Change Log
 ==========
 
+Version 2.0.0 *(2013-09-17)*
+----------------------------
+
+ * New: Support for defining specific classifiers and packaging of artifacts.
+ * Fix: Report errors in an IE-comptible manner.
+
+
 Version 1.0.2 *(2013-04-05)*
 ----------------------------
 
