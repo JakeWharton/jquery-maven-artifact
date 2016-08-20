@@ -12,7 +12,7 @@
 
   function downloadUrl(config, version) {
     var groupPath = config.groupId.replace(/\./g, '/');
-    var url = 'http://repo1.maven.org/maven2/' + groupPath + '/' + config.artifactId + '/' + version + '/' + config.artifactId + '-' + version;
+    var url = 'https://repo1.maven.org/maven2/' + groupPath + '/' + config.artifactId + '/' + version + '/' + config.artifactId + '-' + version;
     if (typeof(config.classifier) !== 'undefined') {
       url += '-' + config.classifier;
     }
@@ -50,7 +50,7 @@
     }
     var config = $.extend({}, defaults, config);
 
-    var url = 'http://search.maven.org/solrsearch/select/?q=' + queryBuilder(config) + '&wt=json&json.wrf=?';
+    var url = 'https://search.maven.org/solrsearch/select/?q=' + queryBuilder(config) + '&wt=json&json.wrf=?';
     $.getJSON(url, function(response) {
       var versions = response.response.docs;
       if (versions.length == 0) {
@@ -74,7 +74,7 @@
     }
     var config = $.extend({}, defaults, config);
 
-    var url = 'http://search.maven.org/solrsearch/select/?q=' + queryBuilder(config) + '&wt=json&rows=10&core=gav&json.wrf=?';
+    var url = 'https://search.maven.org/solrsearch/select/?q=' + queryBuilder(config) + '&wt=json&rows=10&core=gav&json.wrf=?';
     $.getJSON(url, function(response) {
       var versions = response.response.docs;
       if (versions.length == 0) {
